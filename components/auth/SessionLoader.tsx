@@ -4,6 +4,7 @@ import type React from "react"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { Box, CircularProgress, Typography } from "@mui/material"
+import { useRouter } from "next/navigation"
 import type { RootState } from "@/store/store"
 
 interface SessionLoaderProps {
@@ -14,6 +15,7 @@ interface SessionLoaderProps {
 export function SessionLoader({ children, redirectTo = "/login" }: SessionLoaderProps) {
   const { isAuthenticated, loading, user } = useSelector((state: RootState) => state.auth)
   const [redirectState, setRedirectState] = useState<"idle" | "redirecting" | "complete">("idle")
+  const router = useRouter()
 
   useEffect(() => {
     console.log("SessionLoader - Auth state:", { isAuthenticated, loading, user: user?.name })
@@ -23,15 +25,13 @@ export function SessionLoader({ children, redirectTo = "/login" }: SessionLoader
       setRedirectState("redirecting")
 
       setTimeout(() => {
-        if (typeof window !== "undefined") {
-          console.log("SessionLoader - Redirecting to:", redirectTo)
-          window.location.href = redirectTo
-        }
+        console.log("SessionLoader - Redirecting to:", redirectTo)
+        router.push(redirectTo)
       }, 1000)
     } else if (!loading && isAuthenticated) {
       setRedirectState("complete")
     }
-  }, [isAuthenticated, loading, redirectTo, user])
+  }, [isAuthenticated, loading, redirectTo, user, router])
 
   if (loading || redirectState === "idle") {
     return (
