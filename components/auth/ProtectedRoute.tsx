@@ -4,7 +4,6 @@ import type React from "react"
 import { useSelector } from "react-redux"
 import { Box, Typography, Button } from "@mui/material"
 import { Lock } from "@mui/icons-material"
-import { useRouter } from "next/navigation"
 import type { RootState } from "@/store/store"
 
 interface ProtectedRouteProps {
@@ -15,8 +14,6 @@ interface ProtectedRouteProps {
 
 export function ProtectedRoute({ children, requiredRoles = [], fallbackPath = "/" }: ProtectedRouteProps) {
   const { user, isAuthenticated } = useSelector((state: RootState) => state.auth)
-  const router = useRouter()
-
 
   if (!isAuthenticated || !user) {
     return (
@@ -46,7 +43,7 @@ export function ProtectedRoute({ children, requiredRoles = [], fallbackPath = "/
 
     if (!hasRequiredRole) {
       const handleGoBack = () => {
-        router.push(fallbackPath)
+        window.location.href = fallbackPath
       }
 
       return (

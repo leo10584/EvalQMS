@@ -1,5 +1,5 @@
 "use client"
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 import {
   Drawer,
   List,
@@ -28,10 +28,9 @@ const menuItems = [
 
 export default function Navigation() {
   const pathname = usePathname()
-  const router = useRouter()
 
   const handleNavigation = (path: string) => {
-    router.push(path)
+    window.location.href = path
   }
 
   return (
