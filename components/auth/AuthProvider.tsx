@@ -27,15 +27,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (isDevelopment && !hasKeycloakConfig) {
-      // Mock user for development
-      dispatch(
-        setUser({
-          id: "dev-user-1",
-          name: "Dr. Sarah Johnson",
-          email: "sarah.johnson@mw-qms.com",
-          roles: ["medical-writer", "project-manager", "qa-reviewer"],
-        }),
-      )
+      // Mock user for development - set immediately
+      setTimeout(() => {
+        dispatch(
+          setUser({
+            id: "dev-user-1",
+            name: "Dr. Sarah Johnson",
+            email: "sarah.johnson@mw-qms.com",
+            roles: ["medical-writer", "project-manager", "qa-reviewer"],
+          }),
+        )
+      }, 100) // Small delay to ensure Redux store is ready
       return
     }
 

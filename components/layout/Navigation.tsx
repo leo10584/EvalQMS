@@ -1,5 +1,5 @@
 "use client"
-
+import { usePathname } from "next/navigation"
 import {
   Drawer,
   List,
@@ -27,6 +27,14 @@ const menuItems = [
 ]
 
 export default function Navigation() {
+  const pathname = usePathname()
+
+  const handleNavigation = (path: string) => {
+    if (typeof window !== "undefined") {
+      window.location.href = path
+    }
+  }
+
   return (
     <Drawer
       variant="permanent"
@@ -49,7 +57,22 @@ export default function Navigation() {
         <List>
           {menuItems.map((item) => (
             <ListItem key={item.text} disablePadding>
-              <ListItemButton>
+              <ListItemButton
+                selected={pathname === item.path}
+                onClick={() => handleNavigation(item.path)}
+                sx={{
+                  "&.Mui-selected": {
+                    backgroundColor: "primary.main",
+                    color: "primary.contrastText",
+                    "&:hover": {
+                      backgroundColor: "primary.dark",
+                    },
+                    "& .MuiListItemIcon-root": {
+                      color: "primary.contrastText",
+                    },
+                  },
+                }}
+              >
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.text} />
               </ListItemButton>

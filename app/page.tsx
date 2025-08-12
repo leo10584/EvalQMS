@@ -21,34 +21,19 @@ import {
 } from "@mui/material"
 import { Settings, Notifications } from "@mui/icons-material"
 import type { RootState } from "@/store/store"
+import { SessionLoader } from "@/components/auth/SessionLoader"
 import Navigation from "@/components/layout/Navigation"
 import DashboardMetrics from "@/components/dashboard/DashboardMetrics"
 import ProjectOverview from "@/components/dashboard/ProjectOverview"
 import QualityOverview from "@/components/dashboard/QualityOverview"
 import RecentActivity from "@/components/dashboard/RecentActivity"
 
-export default function Dashboard() {
+function DashboardContent() {
   const [activeTab, setActiveTab] = useState(0)
-  const { user, isAuthenticated, loading } = useSelector((state: RootState) => state.auth)
+  const { user } = useSelector((state: RootState) => state.auth)
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setActiveTab(newValue)
-  }
-
-  if (loading) {
-    return (
-      <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
-        <Typography variant="h6">Loading...</Typography>
-      </Box>
-    )
-  }
-
-  if (!isAuthenticated) {
-    return (
-      <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
-        <Typography variant="h6">Authenticating...</Typography>
-      </Box>
-    )
   }
 
   return (
@@ -133,5 +118,13 @@ export default function Dashboard() {
         </Container>
       </Box>
     </Box>
+  )
+}
+
+export default function Dashboard() {
+  return (
+    <SessionLoader>
+      <DashboardContent />
+    </SessionLoader>
   )
 }
