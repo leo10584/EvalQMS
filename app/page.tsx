@@ -29,10 +29,18 @@ import RecentActivity from "@/components/dashboard/RecentActivity"
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState(0)
-  const { user, isAuthenticated } = useSelector((state: RootState) => state.auth)
+  const { user, isAuthenticated, loading } = useSelector((state: RootState) => state.auth)
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setActiveTab(newValue)
+  }
+
+  if (loading) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
+        <Typography variant="h6">Loading...</Typography>
+      </Box>
+    )
   }
 
   if (!isAuthenticated) {
