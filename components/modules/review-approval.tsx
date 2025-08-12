@@ -34,7 +34,7 @@ interface ApprovalRecord {
   meaning: string
 }
 
-export function ReviewApproval() {
+export default function ReviewApproval() {
   const [reviewTasks] = useState<ReviewTask[]>([
     {
       id: "1",

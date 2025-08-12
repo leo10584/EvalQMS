@@ -32,7 +32,7 @@ interface Project {
   qualityScore?: number
 }
 
-export function ProjectManagement() {
+export default function ProjectManagement() {
   const [projects, setProjects] = useState<Project[]>([
     {
       id: "1",

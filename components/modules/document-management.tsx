@@ -27,7 +27,7 @@ interface Comment {
   resolved: boolean
 }
 
-export function DocumentManagement() {
+export default function DocumentManagement() {
   const [documents] = useState<Document[]>([
     {
       id: "1",

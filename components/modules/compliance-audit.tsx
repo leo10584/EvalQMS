@@ -42,7 +42,7 @@ interface CAPA {
   priority: "High" | "Medium" | "Low"
 }
 
-export function ComplianceAudit() {
+export default function ComplianceAudit() {
   const [auditEntries] = useState<AuditEntry[]>([
     {
       id: "1",

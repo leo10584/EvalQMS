@@ -18,7 +18,7 @@ interface MetricCard {
   icon: React.ReactNode
 }
 
-export function AnalyticsReporting() {
+function AnalyticsReporting() {
   const [timeRange, setTimeRange] = useState("last-30-days")
 
   const executiveMetrics: MetricCard[] = [
@@ -378,3 +378,5 @@ export function AnalyticsReporting() {
     </div>
   )
 }
+
+export default AnalyticsReporting

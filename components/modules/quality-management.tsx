@@ -38,7 +38,7 @@ interface QualityIssue {
   createdDate: string
 }
 
-export function QualityManagement() {
+export default function QualityManagement() {
   const [qualityGates, setQualityGates] = useState<QualityGate[]>([
     {
       id: "1",
