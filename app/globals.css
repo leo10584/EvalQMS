@@ -1,5 +1,5 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@import "tailwindcss";
+@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -119,5 +119,61 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* Added Material-UI compatibility styles */
+    font-family: "Inter", "Roboto", "Helvetica", "Arial", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Added custom styles for QMS application */
+  .qms-card {
+    @apply bg-card text-card-foreground border border-border rounded-lg shadow-sm;
+  }
+
+  .qms-button-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 focus:ring-2 focus:ring-primary focus:ring-offset-2;
+  }
+
+  .qms-button-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/90 focus:ring-2 focus:ring-secondary focus:ring-offset-2;
+  }
+
+  .qms-input {
+    @apply bg-background border border-input rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent;
+  }
+
+  .qms-quality-excellent {
+    @apply text-green-600 bg-green-50 border-green-200;
+  }
+
+  .qms-quality-good {
+    @apply text-green-500 bg-green-50 border-green-200;
+  }
+
+  .qms-quality-fair {
+    @apply text-yellow-600 bg-yellow-50 border-yellow-200;
+  }
+
+  .qms-quality-poor {
+    @apply text-red-600 bg-red-50 border-red-200;
+  }
+}
+
+/* Added Material-UI component overrides for better integration */
+@layer components {
+  .MuiCard-root {
+    @apply qms-card;
+  }
+
+  .MuiButton-containedPrimary {
+    @apply qms-button-primary;
+  }
+
+  .MuiButton-containedSecondary {
+    @apply qms-button-secondary;
+  }
+
+  .MuiTextField-root .MuiOutlinedInput-root {
+    @apply qms-input;
   }
 }
